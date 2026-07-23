@@ -1,5 +1,13 @@
+import Header from "./components/Header"
+
 export default function App() {
   return (
-    <h1 className="text-3xl font-bold text-primary bg-black">Tailwind works</h1>
-  );
+    <main className="relative min-h-screen bg-white flex flex-col items-center text-black"> 
+      < Header />
+    
+    
+    
+    
+    </main>
+  )
 }

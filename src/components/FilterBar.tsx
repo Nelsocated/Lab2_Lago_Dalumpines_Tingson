@@ -8,7 +8,7 @@ const category = [
   { name: "Peripherals", items: ["Keyboard", "Mouse", "Earphones"] },
 ];
 
-export default function FilterBar() {
+const FilterBar = () => {
   const [filter, setFilter] = useState<string[]>([]);
   const [minVal, setMinVal] = useState(2500);
   const [maxVal, setMaxVal] = useState(7500);
@@ -127,4 +127,6 @@ export default function FilterBar() {
       </form>
     </aside>
   );
-}
+};
+
+export default FilterBar;

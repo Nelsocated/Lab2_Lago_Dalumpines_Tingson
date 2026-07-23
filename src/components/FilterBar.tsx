@@ -39,7 +39,7 @@ const FilterBar = () => {
   }
 
   return (
-    <aside className="max-w-[225px] h-[calc(100vh-5rem)] mt-20 border-r border-black">
+    <aside className="max-w-[225px] h-[calc(100vh-5rem)] border-r border-black">
       <h1 className="text-2xl font-bold py-2 px-5">Filter Options</h1>
       <hr />
 

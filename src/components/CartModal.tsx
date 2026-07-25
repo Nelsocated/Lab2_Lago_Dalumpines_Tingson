@@ -1,0 +1,149 @@
+import { ShoppingCart, X } from "lucide-react";
+import React, { useState } from "react";
+import CartCard from "./CartCard";
+
+export default function CartModal() {
+  const [show, setShow] = useState(false);
+  const [sub, setSub] = useState(0);
+  const [shipping, setShipping] = useState(0);
+  const [total, setTotal] = useState(0);
+  const [cart, setCart] = useState(0);
+
+  function checkoutSubmit(e: React.FormEvent<HTMLFormElement>) {
+    setShow(!show);
+    setSub(0);
+    setShipping(0);
+    setTotal(0);
+    setCart(0);
+    return;
+  }
+
+  return (
+    <>
+      <button
+        onClick={() => setShow(true)}
+        className="fixed bottom-6 right-6 z-40 border-2 border-primary rounded-full p-3 bg-white hover:scale-105 transition-all hover:bg-primary shadow-lg"
+      >
+        {cart ? (
+          <div className="absolute flex items-center justify-center w-5 h-5 bg-primary text-white text-xs font-bold rounded-full translate-x-6">
+            {cart}
+          </div>
+        ) : (
+          ""
+        )}
+        <ShoppingCart size={35} />
+      </button>
+
+      {show && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 p-4">
+          <article className="max-w-lg w-full max-h-[60vh] border p-2 text-lg bg-white rounded-xl overflow-hidden flex flex-col">
+            <form
+              onSubmit={checkoutSubmit}
+              className="flex flex-col flex-1 min-h-0"
+            >
+              <div className="flex justify-between items-center">
+                <h1 className="text-2xl">Cart</h1>
+                <button type="button" onClick={() => setShow(false)}>
+                  <X size={25} />
+                </button>
+              </div>
+
+              <div className="flex-1 min-h-0 space-y-2 overflow-y-auto p-2 scroll-smooth">
+                <CartCard
+                  url="/"
+                  category="Laptop"
+                  product="Nigga"
+                  price="450"
+                  quantity={1}
+                  subtotal={450}
+                />
+                <CartCard
+                  url="/"
+                  category="Laptop"
+                  product="Nigga"
+                  price="450"
+                  quantity={1}
+                  subtotal={450}
+                />
+                <CartCard
+                  url="/"
+                  category="Laptop"
+                  product="Nigga"
+                  price="450"
+                  quantity={1}
+                  subtotal={450}
+                />
+                <CartCard
+                  url="/"
+                  category="Laptop"
+                  product="Nigga"
+                  price="450"
+                  quantity={1}
+                  subtotal={450}
+                />
+                <CartCard
+                  url="/"
+                  category="Laptop"
+                  product="Nigga"
+                  price="450"
+                  quantity={1}
+                  subtotal={450}
+                />
+                <CartCard
+                  url="/"
+                  category="Laptop"
+                  product="Nigga"
+                  price="450"
+                  quantity={1}
+                  subtotal={450}
+                />
+                <CartCard
+                  url="/"
+                  category="Laptop"
+                  product="Nigga"
+                  price="450"
+                  quantity={1}
+                  subtotal={450}
+                />
+              </div>
+
+              <hr className="bg-black" />
+
+              <div className="grid grid-cols-2 justify-items-end items-center">
+                <div className="flex flex-col justify-end">
+                  <p>Subtotal</p>
+                  <p>Shipping</p>
+                </div>
+
+                <div className="flex flex-col justify-end font-semibold mr-2">
+                  <p>{sub ? `$ ${sub}` : 0}</p>
+                  <p>{shipping ? `$ ${shipping}` : 0}</p>
+                </div>
+              </div>
+
+              <hr className="bg-black" />
+
+              <div className="grid grid-cols-2 justify-items-end items-center">
+                <div className="flex flex-col justify-end font-semibold">
+                  Total
+                </div>
+                <div className="flex flex-col justify-end font-bold text-primary mr-2">
+                  {total ? `$ ${total}` : 0}
+                </div>
+              </div>
+
+              <div className="flex justify-end mt-2">
+                <button
+                  type="submit"
+                  className="bg-primary rounded-[15px] px-3 py-2 text-white font-bold text-lg flex items-center"
+                >
+                  Checkout
+                </button>
+              </div>
+            </form>
+          </article>
+        </div>
+      )}
+    </>
+  );
+}

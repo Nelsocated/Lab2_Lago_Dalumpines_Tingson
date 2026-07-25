@@ -12,3 +12,27 @@ input[type="range"]::-webkit-slider-thumb {
 input[type="range"]::-moz-range-thumb {
   pointer-events: auto;
 }
+
+::-webkit-scrollbar {
+  width: 4px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #f08c00;
+  border-radius: 999px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #f08c00;
+}
+
+body {
+  scrollbar-gutter: stable;
+}
+.scroll-stable {
+  scrollbar-gutter: stable;
+}

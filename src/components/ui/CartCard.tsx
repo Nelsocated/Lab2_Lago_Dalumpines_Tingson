@@ -1,7 +1,6 @@
-import { CartItem } from "./interfaces";
+import { CartItem } from "../types/interfaces";
 
 export default function CartCard({
-  id,
   name,
   category,
   price,
@@ -11,10 +10,7 @@ export default function CartCard({
   const subtotal = quantity * price;
 
   return (
-    <article
-      key={id}
-      className="grid grid-cols-[80px_80px_1fr_1fr] gap-2 items-center"
-    >
+    <article className="grid grid-cols-[80px_80px_1fr_1fr] gap-2 items-center">
       <div className="border-2 border-primary rounded-2xl h-20 w-full overflow-hidden">
         <img
           src={image}

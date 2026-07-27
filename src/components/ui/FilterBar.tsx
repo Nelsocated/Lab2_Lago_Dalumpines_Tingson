@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { SlidersHorizontal } from "lucide-react";
-import { Product } from "./interfaces";
+import { useStore } from "../state/AppStateContext";
 
 const category = [
   { name: "Laptop", items: ["Laptop_Sleeve", "USB-C_Hub"] },
@@ -9,12 +9,8 @@ const category = [
   { name: "Peripherals", items: ["Keyboard", "Mouse", "Earphones"] },
 ];
 
-interface FilterBarProps {
-  products: Product[];
-  onFilter: (result: Product[]) => void;
-}
-
-export default function FilterBar({ products, onFilter }: FilterBarProps) {
+export default function FilterBar() {
+  const { state, setState } = useStore();
   const [filter, setFilter] = useState<string[]>([]);
   const [minVal, setMinVal] = useState(2500);
   const [maxVal, setMaxVal] = useState(7500);
@@ -42,7 +38,7 @@ export default function FilterBar({ products, onFilter }: FilterBarProps) {
   function submitFilter(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
 
-    const result = products.filter((product) => {
+    const result = state.products.filter((product) => {
       const matchesCategory =
         filter.length === 0 || filter.includes(product.category);
       const matchesPrice = product.price >= minVal && product.price <= maxVal;
@@ -50,7 +46,17 @@ export default function FilterBar({ products, onFilter }: FilterBarProps) {
       return matchesCategory && matchesPrice;
     });
 
-    onFilter(result);
+    setState((prev) => ({
+      ...prev,
+      filters: {
+        ...prev.filters,
+        category: filter.join(","),
+        maxPrice: maxVal,
+      },
+    }));
+
+    console.log(result); // or wire this into a "displayedProducts" field if you add one to State
+
     setFilter([]);
     setMaxVal(7500);
     setMinVal(2500);

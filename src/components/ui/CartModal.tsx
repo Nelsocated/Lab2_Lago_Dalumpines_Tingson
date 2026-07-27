@@ -1,76 +1,74 @@
 import { ShoppingCart, X } from "lucide-react";
-import React, { useState } from "react";
+import { useState } from "react";
 import CartCard from "./CartCard";
+import { useStore } from "../state/AppStateContext";
 
 export default function CartModal() {
-  const [show, setShow] = useState(false);
+  const { state, setState } = useStore();
   const [sub, setSub] = useState(0);
   const [shipping, setShipping] = useState(0);
   const [total, setTotal] = useState(0);
-  const [cart, setCart] = useState(0);
+
+  function openCart() {
+    setState((prev) => ({ ...prev, isCartOpen: true }));
+  }
+
+  function closeCart() {
+    setState((prev) => ({ ...prev, isCartOpen: false }));
+  }
 
   function checkoutSubmit(e: React.FormEvent<HTMLFormElement>) {
-    setShow(!show);
+    e.preventDefault();
     setSub(0);
     setShipping(0);
     setTotal(0);
-    setCart(0);
-    return;
+    setState((prev) => ({ ...prev, isCartOpen: false, cart: [] }));
   }
 
   return (
     <>
       <button
-        onClick={() => setShow(true)}
+        onClick={openCart}
         className="fixed bottom-6 right-6 z-40 border-2 border-primary rounded-full p-3 bg-white hover:scale-105 transition-all hover:bg-primary shadow-lg"
       >
-        {cart ? (
+        {state.cart.length > 0 && (
           <div className="absolute flex items-center justify-center w-5 h-5 bg-primary text-white text-xs font-bold rounded-full translate-x-6">
-            {cart}
+            {state.cart.length}
           </div>
-        ) : (
-          ""
         )}
         <ShoppingCart size={35} />
       </button>
 
-      {show && (
+      {state.isCartOpen && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 p-4">
           <article className="max-w-lg w-full max-h-[60vh] border p-2 text-lg bg-white rounded-xl overflow-hidden flex flex-col">
             <form
               onSubmit={checkoutSubmit}
               className="flex flex-col flex-1 min-h-0"
             >
-              <div className="flex justify-between items-cente mb-2">
+              <div className="flex justify-between items-center mb-2">
                 <div className="flex items-center gap-2">
                   <ShoppingCart size={20} />
                   <h1 className="text-xl">Cart</h1>
                 </div>
-                <button type="button" onClick={() => setShow(false)}>
+                <button type="button" onClick={closeCart}>
                   <X size={20} />
                 </button>
               </div>
 
               <div className="flex-1 min-h-0 space-y-2 overflow-y-auto scroll-smooth">
-                <CartCard
-                  id="1"
-                  image="./images.jpg"
-                  category="Laptop"
-                  name="Nigga"
-                  price={450}
-                  quantity={1}
-                  inStock
-                />
+                {state.cart.map((item) => (
+                  <CartCard key={item.id} {...item} />
+                ))}
               </div>
 
               <hr className="bg-black" />
 
               <div className="grid grid-cols-2 justify-items-end items-center">
-                <div className="flex flex-col justify-end text-ms">
+                <div className="flex flex-col justify-end text-sm">
                   <p>Subtotal</p>
                   <p>Shipping</p>
                 </div>
-
                 <div className="flex flex-col justify-end font-semibold mr-2">
                   <p>{sub ? `$ ${sub}` : 0}</p>
                   <p>{shipping ? `$ ${shipping}` : 0}</p>

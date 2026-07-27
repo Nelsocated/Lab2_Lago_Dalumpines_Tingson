@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { SlidersHorizontal } from "lucide-react";
+import { Product } from "./interfaces";
 
 const category = [
   { name: "Laptop", items: ["Laptop_Sleeve", "USB-C_Hub"] },
@@ -8,10 +9,16 @@ const category = [
   { name: "Peripherals", items: ["Keyboard", "Mouse", "Earphones"] },
 ];
 
-const FilterBar = () => {
+interface FilterBarProps {
+  products: Product[];
+  onFilter: (result: Product[]) => void;
+}
+
+export default function FilterBar({ products, onFilter }: FilterBarProps) {
   const [filter, setFilter] = useState<string[]>([]);
   const [minVal, setMinVal] = useState(2500);
   const [maxVal, setMaxVal] = useState(7500);
+
   const MIN = 0;
   const MAX = 10000;
 
@@ -34,8 +41,19 @@ const FilterBar = () => {
 
   function submitFilter(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
-    console.log(filter);
+
+    const result = products.filter((product) => {
+      const matchesCategory =
+        filter.length === 0 || filter.includes(product.category);
+      const matchesPrice = product.price >= minVal && product.price <= maxVal;
+
+      return matchesCategory && matchesPrice;
+    });
+
+    onFilter(result);
     setFilter([]);
+    setMaxVal(7500);
+    setMinVal(2500);
   }
 
   return (
@@ -44,38 +62,36 @@ const FilterBar = () => {
       <hr />
 
       <form onSubmit={submitFilter}>
-        {category.map(({ name, items }) => {
-          return (
-            <>
-              <div key={name} className="py-2 px-5">
-                <label key={name} className="flex items-center gap-2">
+        {category.map(({ name, items }) => (
+          <div key={name}>
+            <div className="py-2 px-5">
+              <label className="flex items-center gap-2">
+                <input
+                  type="checkbox"
+                  className="accent-primary peer-checked:bg-black"
+                  value={name}
+                  checked={filter.includes(name)}
+                  onChange={() => handleCheckboxChange(name)}
+                />{" "}
+                {name}
+              </label>
+
+              {items.map((acc) => (
+                <label key={acc} className="flex items-center ml-5 gap-2">
                   <input
                     type="checkbox"
                     className="accent-primary peer-checked:bg-black"
-                    value={name}
-                    checked={filter.includes(name)}
-                    onChange={() => handleCheckboxChange(name)}
+                    value={acc}
+                    checked={filter.includes(acc)}
+                    onChange={() => handleCheckboxChange(acc)}
                   />{" "}
-                  {name}
+                  {acc.replace(/_/g, " ")}
                 </label>
-
-                {items.map((acc) => (
-                  <label key={acc} className="flex items-center ml-5 gap-2">
-                    <input
-                      type="checkbox"
-                      className="accent-primary peer-checked:bg-black"
-                      value={acc}
-                      checked={filter.includes(acc)}
-                      onChange={() => handleCheckboxChange(acc)}
-                    />{" "}
-                    {acc.replace(/_/g, " ")}
-                  </label>
-                ))}
-              </div>
-              <hr />
-            </>
-          );
-        })}
+              ))}
+            </div>
+            <hr />
+          </div>
+        ))}
 
         <label className="flex flex-col gap-2 px-5">
           Price
@@ -127,6 +143,4 @@ const FilterBar = () => {
       </form>
     </aside>
   );
-};
-
-export default FilterBar;
+}

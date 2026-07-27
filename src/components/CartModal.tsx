@@ -41,76 +41,32 @@ export default function CartModal() {
               onSubmit={checkoutSubmit}
               className="flex flex-col flex-1 min-h-0"
             >
-              <div className="flex justify-between items-center">
-                <h1 className="text-2xl">Cart</h1>
+              <div className="flex justify-between items-cente mb-2">
+                <div className="flex items-center gap-2">
+                  <ShoppingCart size={20} />
+                  <h1 className="text-xl">Cart</h1>
+                </div>
                 <button type="button" onClick={() => setShow(false)}>
-                  <X size={25} />
+                  <X size={20} />
                 </button>
               </div>
 
-              <div className="flex-1 min-h-0 space-y-2 overflow-y-auto p-2 scroll-smooth">
+              <div className="flex-1 min-h-0 space-y-2 overflow-y-auto scroll-smooth">
                 <CartCard
-                  url="/"
+                  id="1"
+                  image="./images.jpg"
                   category="Laptop"
-                  product="Nigga"
-                  price="450"
+                  name="Nigga"
+                  price={450}
                   quantity={1}
-                  subtotal={450}
-                />
-                <CartCard
-                  url="/"
-                  category="Laptop"
-                  product="Nigga"
-                  price="450"
-                  quantity={1}
-                  subtotal={450}
-                />
-                <CartCard
-                  url="/"
-                  category="Laptop"
-                  product="Nigga"
-                  price="450"
-                  quantity={1}
-                  subtotal={450}
-                />
-                <CartCard
-                  url="/"
-                  category="Laptop"
-                  product="Nigga"
-                  price="450"
-                  quantity={1}
-                  subtotal={450}
-                />
-                <CartCard
-                  url="/"
-                  category="Laptop"
-                  product="Nigga"
-                  price="450"
-                  quantity={1}
-                  subtotal={450}
-                />
-                <CartCard
-                  url="/"
-                  category="Laptop"
-                  product="Nigga"
-                  price="450"
-                  quantity={1}
-                  subtotal={450}
-                />
-                <CartCard
-                  url="/"
-                  category="Laptop"
-                  product="Nigga"
-                  price="450"
-                  quantity={1}
-                  subtotal={450}
+                  inStock
                 />
               </div>
 
               <hr className="bg-black" />
 
               <div className="grid grid-cols-2 justify-items-end items-center">
-                <div className="flex flex-col justify-end">
+                <div className="flex flex-col justify-end text-ms">
                   <p>Subtotal</p>
                   <p>Shipping</p>
                 </div>
@@ -135,7 +91,7 @@ export default function CartModal() {
               <div className="flex justify-end mt-2">
                 <button
                   type="submit"
-                  className="bg-primary rounded-[15px] px-3 py-2 text-white font-bold text-lg flex items-center"
+                  className="bg-primary rounded-[15px] px-2 py-1 text-white font-bold flex items-center"
                 >
                   Checkout
                 </button>

@@ -2,6 +2,7 @@ export interface Product {
   id: string;
   name: string;
   category: string;
+  subcategory: string;
   price: number;
   image: string; // url to the product's image
   inStock: boolean;

@@ -26,7 +26,9 @@ export default function CartCard({
       <div className="flex flex-col leading-6">
         <span className="text-neutral-500 text-xs">{category}</span>
         <span className="font-semibold truncate">{name}</span>
-        <span className="font-semibold text-primary">$ {price}</span>
+        <span className="font-semibold text-primary">
+          $ {price.toLocaleString()}
+        </span>
       </div>
 
       <div className="flex justify-center gap-3">
@@ -37,7 +39,8 @@ export default function CartCard({
         </div>{" "}
       </div>
       <div className="flex justify-center gap-3">
-        $ {subtotal} <Trash onClick={() => removeCartItem(id)} />
+        $ {subtotal.toLocaleString()}{" "}
+        <Trash onClick={() => removeCartItem(id)} />
       </div>
     </article>
   );

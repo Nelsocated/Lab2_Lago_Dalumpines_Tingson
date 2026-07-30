@@ -1,4 +1,7 @@
+import { useActions } from "../state/useActions";
+
 const Header = () => {
+  const { setFilters } = useActions();
   return (
     <header className="w-full h-20 bg-black border-b  border-black py-1 px-5 flex items-center justify-between">
       <div className="flex items-center">
@@ -19,6 +22,7 @@ const Header = () => {
           <input
             type="text"
             placeholder="Search"
+            onChange={(e) => setFilters({ searchQuery: e.target.value })}
             className="w-64 px-5 py-1.5 text-xs font-mono border border-gray-300 rounded-lg uppercase tracking-wide placeholder-gray-400 focus:outline-none focus:border-orange-500"
           ></input>
         </div>

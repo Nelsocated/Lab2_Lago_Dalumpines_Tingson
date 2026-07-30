@@ -1,13 +1,13 @@
 import { useState } from "react";
 import { SlidersHorizontal } from "lucide-react";
-import { useStore } from "../state/AppStateContext";
 import { category } from "../types/category";
+import { useActions } from "../state/useActions";
 
 export default function FilterBar() {
-  const { state, setState } = useStore();
+  const { setFilters } = useActions();
   const [filter, setFilter] = useState<string[]>([]);
-  const [minVal, setMinVal] = useState(2500);
-  const [maxVal, setMaxVal] = useState(7500);
+  const [minVal, setMinVal] = useState(0);
+  const [maxVal, setMaxVal] = useState(100000);
 
   const MIN = 0;
   const MAX = 100000;
@@ -31,31 +31,11 @@ export default function FilterBar() {
 
   function submitFilter(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
-
-    const result = state.products.filter((product) => {
-      const matchesCategory =
-        filter.length === 0 ||
-        filter.includes(product.category) ||
-        filter.includes(product.subcategory);
-      const matchesPrice = product.price >= minVal && product.price <= maxVal;
-
-      return matchesCategory && matchesPrice;
+    setFilters({
+      category: filter.join(","),
+      minPrice: minVal,
+      maxPrice: maxVal,
     });
-
-    setState((prev) => ({
-      ...prev,
-      filters: {
-        ...prev.filters,
-        category: filter.join(","),
-        maxPrice: maxVal,
-      },
-    }));
-
-    console.log(result); // or wire this into a "displayedProducts" field if you add one to State
-
-    setFilter([]);
-    setMaxVal(75000);
-    setMinVal(25000);
   }
 
   return (

@@ -5,32 +5,24 @@ import { useStore } from "../state/AppStateContext";
 import { useActions } from "../state/useActions";
 
 export default function CartModal() {
-  const { state, setState } = useStore();
-  const { clearCart } = useActions();
+  const { state } = useStore();
+  const { clearCart, checkout, toggleCart } = useActions();
   const [sub, setSub] = useState(0);
   const [shipping, setShipping] = useState(50);
   const [total, setTotal] = useState(0);
 
-  function openCart() {
-    setState((prev) => ({ ...prev, isCartOpen: true }));
-  }
-
-  function closeCart() {
-    setState((prev) => ({ ...prev, isCartOpen: false }));
-  }
-
   function checkoutSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
+    checkout();
     setSub(0);
-    setShipping(0);
+    setShipping(50);
     setTotal(0);
-    setState((prev) => ({ ...prev, isCartOpen: false, cart: [] }));
   }
 
   return (
     <>
       <button
-        onClick={openCart}
+        onClick={() => toggleCart}
         className="fixed bottom-6 right-6 z-40 border-2 border-primary rounded-full p-3 bg-white hover:scale-105 transition-all hover:bg-primary shadow-lg"
       >
         {state.cart.length > 0 && (
@@ -54,7 +46,7 @@ export default function CartModal() {
                   <h1 className="text-xl">Cart</h1>
                   <Trash onClick={() => clearCart()} />
                 </div>
-                <button type="button" onClick={closeCart}>
+                <button type="button" onClick={() => toggleCart}>
                   <X size={20} />
                 </button>
               </div>
@@ -73,8 +65,8 @@ export default function CartModal() {
                   <p>Shipping</p>
                 </div>
                 <div className="flex flex-col justify-end font-semibold mr-2">
-                  <p>{sub ? `$ ${sub}` : 0}</p>
-                  <p>{shipping ? `$ ${shipping}` : 0}</p>
+                  <p>{sub ? `$ ${sub.toLocaleString()}` : 0}</p>
+                  <p>{shipping ? `$ ${shipping.toLocaleString()}` : 0}</p>
                 </div>
               </div>
 
@@ -85,7 +77,7 @@ export default function CartModal() {
                   Total
                 </div>
                 <div className="flex flex-col justify-end font-bold text-primary mr-2">
-                  {total ? `$ ${total}` : 0}
+                  {total ? `$ ${total.toLocaleString()}` : 0}
                 </div>
               </div>
 

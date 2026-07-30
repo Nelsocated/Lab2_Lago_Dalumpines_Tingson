@@ -1,45 +1,27 @@
 import { useStore } from "./AppStateContext";
-import { Product } from "../types/interfaces";
+import { Product, State } from "../types/interfaces";
 
 export function useActions() {
-  const { setState } = useStore();
+  const { dispatch } = useStore();
 
-  function updateQuantity(id: string, newQuantity: number) {
-    setState((prev) => ({
-      ...prev,
-      cart: prev.cart.map((item) =>
-        item.id === id ? { ...item, quantity: newQuantity } : item,
-      ),
-    }));
-  }
+  return {
+    addToCart: (product: Product) =>
+      dispatch({ type: "ADD_TO_CART", payload: product }),
 
-  function removeCartItem(id: string) {
-    setState((prev) => ({
-      ...prev,
-      cart: prev.cart.filter((item) => item.id !== id),
-    }));
-  }
+    removeCartItem: (id: string) =>
+      dispatch({ type: "REMOVE_FROM_CART", payload: { id } }),
 
-  function clearCart() {
-    setState((prev) => ({ ...prev, cart: [] }));
-  }
+    updateQuantity: (id: string, quantity: number) =>
+      dispatch({ type: "UPDATE_QUANTITY", payload: { id, quantity } }),
 
-  function addToCart(product: Product) {
-    setState((prev) => {
-      const alreadyInCart = prev.cart.find((item) => item.id === product.id);
+    clearCart: () => dispatch({ type: "CLEAR_CART" }),
 
-      return {
-        ...prev,
-        cart: alreadyInCart
-          ? prev.cart.map((item) =>
-              item.id === product.id
-                ? { ...item, quantity: item.quantity + 1 }
-                : item,
-            )
-          : [...prev.cart, { ...product, quantity: 1 }],
-      };
-    });
-  }
+    setFilters: (filters: Partial<State["filters"]>) =>
+      dispatch({ type: "SET_FILTERS", payload: filters }),
 
-  return { updateQuantity, removeCartItem, clearCart, addToCart };
+    toggleCart: (open?: boolean) =>
+      dispatch({ type: "TOGGLE_CART", payload: open }),
+
+    checkout: () => dispatch({ type: "CHECKOUT" }),
+  };
 }

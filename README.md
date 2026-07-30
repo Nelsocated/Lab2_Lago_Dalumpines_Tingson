@@ -1,46 +1,82 @@
-# Getting Started with Create React App
+# GearHub Mini E-Commerce
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+GearHub is a single-page React app for browsing tech accessories, filtering products, managing a cart, and processing a simulated checkout. State management relies entirely on React's `useReducer` combined with `createContext`.
 
-## Available Scripts
+**Course:** SE2144 — Lab 2 Activity
+**Members:** Nelson Lago III, Justin Jan Dalumpines
 
-In the project directory, you can run:
+---
 
-### `npm start`
+## Tech Stack
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+- React (Create React App)
+- TypeScript
+- Tailwind CSS
+- React Context API + `useReducer` for global state
+- Static JSON / mock data file for products
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+---
 
-### `npm test`
+## Core Features
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+### Product Browsing & Filtering
+- Grid display of products fetched from a static JSON file or mock data file.
+- Filter products by **category**, **max price range**, and **search query**.
+- Sort products by **price** (low-to-high, high-to-low) or **title**.
 
-### `npm run build`
+### Global Cart Management
+- Slide-out / drawer overlay for the Shopping Cart.
+- Add items, remove items, and adjust item quantities (+ / -).
+- Real-time **subtotal** and **grand total** calculation.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+### User Experience Details
+- Badge counter on the cart icon reflecting the **total item count** (sum of quantities, not just distinct line items).
+- Simulated checkout flow (no real payment processing).
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+---
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## Getting Started
 
-### `npm run eject`
+### Prerequisites
+- [Node.js](https://nodejs.org/) (v18 or higher recommended)
+- npm (comes with Node.js)
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+### Installation
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+1. Clone the repository
+   ```bash
+   git clone https://github.com/nelsocated/WebDev_Lab2_Lago_Dalumpines.git
+   ```
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+2. Install dependencies
+   ```bash
+   npm install
+   ```
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+3. Start the development server
+   ```bash
+   npm start
+   ```
 
-## Learn More
+### Build for Production
+```bash
+npm run build
+```
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+---
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+## Usage
+
+1. Browse the product grid on the home page.
+2. Use the filter bar to narrow results by category, price range, or search keyword.
+3. Sort products by price or title using the sort dropdown.
+4. Click **Add to Cart** on any product to add it to your cart.
+5. Click the cart icon to open the cart drawer, where you can adjust quantities or remove items.
+6. View the real-time subtotal and grand total in the cart drawer.
+7. Click **Checkout** to simulate the checkout process.
+
+---
+
+## License
+
+This project was created for academic purposes as part of the SE2144 course.

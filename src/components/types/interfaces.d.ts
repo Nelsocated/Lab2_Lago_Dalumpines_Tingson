@@ -19,7 +19,17 @@ export interface State {
     searchQuery: string;
     category: string;
     maxPrice: number;
+    minPrice: number;
     sortBy: "default" | "price-asc" | "price-desc";
   };
   isCartOpen: boolean;
 }
+
+export type Action =
+  | { type: "ADD_TO_CART"; payload: Product }
+  | { type: "REMOVE_FROM_CART"; payload: { id: string } }
+  | { type: "UPDATE_QUANTITY"; payload: { id: string; quantity: number } }
+  | { type: "CLEAR_CART" }
+  | { type: "SET_FILTERS"; payload: Partial<State["filters"]> }
+  | { type: "TOGGLE_CART"; payload?: boolean }
+  | { type: "CHECKOUT" };

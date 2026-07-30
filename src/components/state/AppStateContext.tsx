@@ -1,15 +1,18 @@
-// src/store/StoreContext.tsx
-import { createContext, useContext, useState, ReactNode } from "react";
+// state/AppStateContext.tsx
+import { createContext, useContext, useReducer, Dispatch } from "react";
+import { appReducer } from "./appReducer";
+import { Action } from "../types/interfaces";
 import { State } from "../types/interfaces";
 import { products } from "../types/products";
 
 const initialState: State = {
-  products: products,
+  products,
   cart: [],
   filters: {
     searchQuery: "",
     category: "",
-    maxPrice: 10000,
+    minPrice: 0,
+    maxPrice: 100000,
     sortBy: "default",
   },
   isCartOpen: false,
@@ -17,22 +20,23 @@ const initialState: State = {
 
 interface StoreContextType {
   state: State;
-  setState: React.Dispatch<React.SetStateAction<State>>;
+  dispatch: Dispatch<Action>;
 }
 
-const StoreContext = createContext<StoreContextType | undefined>(undefined);
+const AppStateContext = createContext<StoreContextType | undefined>(undefined);
 
-export function StoreProvider({ children }: { children: ReactNode }) {
-  const [state, setState] = useState<State>(initialState);
+export function AppStateProvider({ children }: { children: React.ReactNode }) {
+  const [state, dispatch] = useReducer(appReducer, initialState);
+
   return (
-    <StoreContext.Provider value={{ state, setState }}>
+    <AppStateContext.Provider value={{ state, dispatch }}>
       {children}
-    </StoreContext.Provider>
+    </AppStateContext.Provider>
   );
 }
 
 export function useStore() {
-  const context = useContext(StoreContext);
-  if (!context) throw new Error("useStore must be used within a StoreProvider");
-  return context;
+  const ctx = useContext(AppStateContext);
+  if (!ctx) throw new Error("useStore must be used within AppStateProvider");
+  return ctx;
 }

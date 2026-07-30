@@ -1,16 +1,15 @@
-import { useStore } from "../state/AppStateContext";
 import { useActions } from "../state/useActions";
+import { useFilteredProducts } from "../state/useFilteredProducts";
 
 export default function ProductGrid() {
-  const { state } = useStore();
   const { addToCart } = useActions();
-
-  const displayedProducts = state.products
+  const displayedProducts = useFilteredProducts();
 
   return (
-    <section className="flex-1 px-8 py-5">
+    <section className="flex-1 h-[calc(100vh-5rem)] px-8 py-5 overflow-y-auto">
       <p className="mb-5 text-m text-neutral-500">
-        Showing 1-{displayedProducts.length} of {displayedProducts.length} results
+        Showing 1-{displayedProducts.length} of {displayedProducts.length}{" "}
+        results
       </p>
 
       <div className="grid grid-cols-1 border-2 border-black gap-8 sm:grid-cols-2 xl:grid-cols-4">

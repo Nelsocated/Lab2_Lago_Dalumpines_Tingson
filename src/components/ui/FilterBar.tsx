@@ -10,7 +10,7 @@ export default function FilterBar() {
   const [maxVal, setMaxVal] = useState(7500);
 
   const MIN = 0;
-  const MAX = 10000;
+  const MAX = 100000;
 
   const handleCheckboxChange = (value: string) => {
     setFilter((prev) =>
@@ -34,7 +34,9 @@ export default function FilterBar() {
 
     const result = state.products.filter((product) => {
       const matchesCategory =
-        filter.length === 0 || filter.includes(product.category);
+        filter.length === 0 ||
+        filter.includes(product.category) ||
+        filter.includes(product.subcategory);
       const matchesPrice = product.price >= minVal && product.price <= maxVal;
 
       return matchesCategory && matchesPrice;
@@ -52,8 +54,8 @@ export default function FilterBar() {
     console.log(result); // or wire this into a "displayedProducts" field if you add one to State
 
     setFilter([]);
-    setMaxVal(7500);
-    setMinVal(2500);
+    setMaxVal(75000);
+    setMinVal(25000);
   }
 
   return (
@@ -62,7 +64,7 @@ export default function FilterBar() {
       <hr />
 
       <form onSubmit={submitFilter}>
-        {category.map(({ name, items }) => (
+        {category.map(({ name, subcategories }) => (
           <div key={name}>
             <div className="py-2 px-5">
               <label className="flex items-center gap-2">
@@ -76,7 +78,7 @@ export default function FilterBar() {
                 {name}
               </label>
 
-              {items.map((acc) => (
+              {subcategories.map((acc) => (
                 <label key={acc} className="flex items-center ml-5 gap-2">
                   <input
                     type="checkbox"
@@ -114,7 +116,7 @@ export default function FilterBar() {
               <input
                 type="range"
                 min={0}
-                max={10000}
+                max={100000}
                 value={minVal}
                 onChange={handleMinChange}
                 className="absolute w-full pointer-events-none accent-primary appearance-none bg-transparent"
@@ -122,7 +124,7 @@ export default function FilterBar() {
               <input
                 type="range"
                 min={0}
-                max={10000}
+                max={100000}
                 value={maxVal}
                 onChange={handleMaxChange}
                 className="absolute w-full pointer-events-none accent-primary appearance-none bg-transparent"

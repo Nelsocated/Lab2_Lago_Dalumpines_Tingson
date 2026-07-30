@@ -1,6 +1,6 @@
 const Header = () => {
   return (
-    <header className="w-full h-20 bg-white border-b border-black py-1 px-5 flex items-center justify-between">
+    <header className="w-full h-20 bg-black border-b  border-black py-1 px-5 flex items-center justify-between">
       <div className="flex items-center">
         <div className="w-20 h-20 rounded-xl flex items-center justify-between">
           <img
@@ -10,7 +10,7 @@ const Header = () => {
             height={300}
           ></img>
         </div>
-        <h1 className="text-2xl font-montserrat font-bold text-black">
+        <h1 className="text-2xl font-montserrat font-bold text-white">
           GearHub
         </h1>
       </div>

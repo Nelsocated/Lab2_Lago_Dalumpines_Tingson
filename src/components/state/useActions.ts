@@ -1,4 +1,5 @@
 import { useStore } from "./AppStateContext";
+import { Product } from "../types/interfaces";
 
 export function useActions() {
   const { setState } = useStore();
@@ -23,5 +24,22 @@ export function useActions() {
     setState((prev) => ({ ...prev, cart: [] }));
   }
 
-  return { updateQuantity, removeCartItem, clearCart };
+  function addToCart(product: Product) {
+    setState((prev) => {
+      const alreadyInCart = prev.cart.find((item) => item.id === product.id);
+
+      return {
+        ...prev,
+        cart: alreadyInCart
+          ? prev.cart.map((item) =>
+              item.id === product.id
+                ? { ...item, quantity: item.quantity + 1 }
+                : item,
+            )
+          : [...prev.cart, { ...product, quantity: 1 }],
+      };
+    });
+  }
+
+  return { updateQuantity, removeCartItem, clearCart, addToCart };
 }

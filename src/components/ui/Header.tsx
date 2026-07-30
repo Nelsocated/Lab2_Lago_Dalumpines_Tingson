@@ -4,7 +4,7 @@ const Header = () => {
       <div className="flex items-center">
         <div className="w-20 h-20 rounded-xl flex items-center justify-between">
           <img
-            src="/Gearhub.svg"
+            src="/favicon/Gearhub.svg"
             alt="GearHub Logo"
             width={300}
             height={300}

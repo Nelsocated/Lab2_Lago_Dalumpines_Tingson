@@ -1,6 +1,7 @@
 import Header from "./components/ui/Header";
 import FilterBar from "./components/ui/FilterBar";
 import CartModal from "./components/ui/CartModal";
+import ProductGrid from "./components/ui/ProductGrid";
 import { StoreProvider } from "./components/state/AppStateContext";
 
 export default function App() {
@@ -8,7 +9,10 @@ export default function App() {
     <StoreProvider>
       <main className="h-screen overflow-y-auto">
         <Header />
-        <FilterBar />
+        <div className="flex min-h-[calc(100vh-5rem)]">
+          <FilterBar />
+          <ProductGrid />
+        </div>
         <CartModal />
       </main>
     </StoreProvider>

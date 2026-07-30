@@ -1,6 +1,6 @@
 export const category = [
-  { name: "Laptop", subcategories: ["Laptop_Sleeve"] },
-  { name: "Phone", subcategories: ["Phone_Case", "Phone_Stand"] },
-  { name: "Tablet", subcategories: ["Keyboard_Case", "Stylus_Pen"] },
-  { name: "Peripherals", subcategories: ["Keyboard", "Mouse", "Earphones"] },
+  { name: "Laptop", subcategories: ["Laptop_Sleeve", "Gaming_Laptop"] },
+  { name: "Phone", subcategories: ["Mobile_Phone", "Phone_Case", "Phone_Stand"] },
+  { name: "Tablet", subcategories: [ "Pad", "Keyboard_Case"] },
+  { name: "Peripherals", subcategories: ["Keyboard", "Mouse"] },
 ];

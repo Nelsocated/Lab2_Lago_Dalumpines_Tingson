@@ -1,16 +1,19 @@
 import { useState } from "react";
 import { SlidersHorizontal } from "lucide-react";
-import { useStore } from "../state/AppStateContext";
-import { category } from "../types/category";
 
-export default function FilterBar() {
-  const { state, setState } = useStore();
+const category = [
+  { name: "Laptop", items: ["Laptop_Sleeve", "USB-C_Hub"] },
+  { name: "Phone", items: ["Phone_Case", "Phone_Stand"] },
+  { name: "Tablet", items: ["Keyboard_Case", "Stylus_Pen"] },
+  { name: "Peripherals", items: ["Keyboard", "Mouse", "Earphones"] },
+];
+
+const FilterBar = () => {
   const [filter, setFilter] = useState<string[]>([]);
   const [minVal, setMinVal] = useState(2500);
   const [maxVal, setMaxVal] = useState(7500);
-
   const MIN = 0;
-  const MAX = 100000;
+  const MAX = 10000;
 
   const handleCheckboxChange = (value: string) => {
     setFilter((prev) =>
@@ -31,31 +34,8 @@ export default function FilterBar() {
 
   function submitFilter(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
-
-    const result = state.products.filter((product) => {
-      const matchesCategory =
-        filter.length === 0 ||
-        filter.includes(product.category) ||
-        filter.includes(product.subcategory);
-      const matchesPrice = product.price >= minVal && product.price <= maxVal;
-
-      return matchesCategory && matchesPrice;
-    });
-
-    setState((prev) => ({
-      ...prev,
-      filters: {
-        ...prev.filters,
-        category: filter.join(","),
-        maxPrice: maxVal,
-      },
-    }));
-
-    console.log(result); // or wire this into a "displayedProducts" field if you add one to State
-
+    console.log(filter);
     setFilter([]);
-    setMaxVal(75000);
-    setMinVal(25000);
   }
 
   return (
@@ -64,36 +44,38 @@ export default function FilterBar() {
       <hr />
 
       <form onSubmit={submitFilter}>
-        {category.map(({ name, subcategories }) => (
-          <div key={name}>
-            <div className="py-2 px-5">
-              <label className="flex items-center gap-2">
-                <input
-                  type="checkbox"
-                  className="accent-primary peer-checked:bg-black"
-                  value={name}
-                  checked={filter.includes(name)}
-                  onChange={() => handleCheckboxChange(name)}
-                />{" "}
-                {name}
-              </label>
-
-              {subcategories.map((acc) => (
-                <label key={acc} className="flex items-center ml-5 gap-2">
+        {category.map(({ name, items }) => {
+          return (
+            <>
+              <div key={name} className="py-2 px-5">
+                <label key={name} className="flex items-center gap-2">
                   <input
                     type="checkbox"
                     className="accent-primary peer-checked:bg-black"
-                    value={acc}
-                    checked={filter.includes(acc)}
-                    onChange={() => handleCheckboxChange(acc)}
+                    value={name}
+                    checked={filter.includes(name)}
+                    onChange={() => handleCheckboxChange(name)}
                   />{" "}
-                  {acc.replace(/_/g, " ")}
+                  {name}
                 </label>
-              ))}
-            </div>
-            <hr />
-          </div>
-        ))}
+
+                {items.map((acc) => (
+                  <label key={acc} className="flex items-center ml-5 gap-2">
+                    <input
+                      type="checkbox"
+                      className="accent-primary peer-checked:bg-black"
+                      value={acc}
+                      checked={filter.includes(acc)}
+                      onChange={() => handleCheckboxChange(acc)}
+                    />{" "}
+                    {acc.replace(/_/g, " ")}
+                  </label>
+                ))}
+              </div>
+              <hr />
+            </>
+          );
+        })}
 
         <label className="flex flex-col gap-2 px-5">
           Price
@@ -108,15 +90,15 @@ export default function FilterBar() {
               <div
                 className="absolute h-2 bg-primary rounded-full"
                 style={{
-                  left: `${minPercent}%`,
-                  right: `${100 - maxPercent}%`,
+                  left: `₱{minPercent}%`,
+                  right: `₱{100 - maxPercent}%`,
                 }}
               />
 
               <input
                 type="range"
                 min={0}
-                max={100000}
+                max={10000}
                 value={minVal}
                 onChange={handleMinChange}
                 className="absolute w-full pointer-events-none accent-primary appearance-none bg-transparent"
@@ -124,7 +106,7 @@ export default function FilterBar() {
               <input
                 type="range"
                 min={0}
-                max={100000}
+                max={10000}
                 value={maxVal}
                 onChange={handleMaxChange}
                 className="absolute w-full pointer-events-none accent-primary appearance-none bg-transparent"
@@ -145,4 +127,6 @@ export default function FilterBar() {
       </form>
     </aside>
   );
-}
+};
+
+export default FilterBar;

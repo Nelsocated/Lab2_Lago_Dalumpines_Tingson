@@ -1,12 +1,14 @@
-import { ShoppingCart, X } from "lucide-react";
+import { ShoppingCart, Trash, X } from "lucide-react";
 import { useState } from "react";
 import CartCard from "./CartCard";
 import { useStore } from "../state/AppStateContext";
+import { useActions } from "../state/useActions";
 
 export default function CartModal() {
   const { state, setState } = useStore();
+  const { clearCart } = useActions();
   const [sub, setSub] = useState(0);
-  const [shipping, setShipping] = useState(0);
+  const [shipping, setShipping] = useState(50);
   const [total, setTotal] = useState(0);
 
   function openCart() {
@@ -50,13 +52,14 @@ export default function CartModal() {
                 <div className="flex items-center gap-2">
                   <ShoppingCart size={20} />
                   <h1 className="text-xl">Cart</h1>
+                  <Trash onClick={() => clearCart()} />
                 </div>
                 <button type="button" onClick={closeCart}>
                   <X size={20} />
                 </button>
               </div>
 
-              <div className="flex-1 min-h-0 space-y-2 overflow-y-auto scroll-smooth">
+              <div className="flex-1 min-h-0 space-y-2 overflow-y-auto scroll-smooth mb-2">
                 {state.cart.map((item) => (
                   <CartCard key={item.id} {...item} />
                 ))}

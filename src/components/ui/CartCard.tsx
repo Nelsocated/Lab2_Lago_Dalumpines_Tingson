@@ -1,12 +1,16 @@
+import { Trash } from "lucide-react";
 import { CartItem } from "../types/interfaces";
+import { useActions } from "../state/useActions";
 
 export default function CartCard({
+  id,
   name,
   category,
   price,
   image,
   quantity,
 }: CartItem) {
+  const { updateQuantity, removeCartItem } = useActions();
   const subtotal = quantity * price;
 
   return (
@@ -21,12 +25,20 @@ export default function CartCard({
 
       <div className="flex flex-col leading-6">
         <span className="text-neutral-500 text-xs">{category}</span>
-        <span className="font-semibold">{name}</span>
+        <span className="font-semibold truncate">{name}</span>
         <span className="font-semibold text-primary">$ {price}</span>
       </div>
 
-      <div className="flex justify-center">{quantity}</div>
-      <div className="flex justify-center">$ {subtotal}</div>
+      <div className="flex justify-center gap-3">
+        {quantity}{" "}
+        <div className="flex flex-col">
+          <button onClick={() => updateQuantity(id, quantity + 1)}>+</button>
+          <button onClick={() => updateQuantity(id, quantity - 1)}>-</button>
+        </div>{" "}
+      </div>
+      <div className="flex justify-center gap-3">
+        $ {subtotal} <Trash onClick={() => removeCartItem(id)} />
+      </div>
     </article>
   );
 }

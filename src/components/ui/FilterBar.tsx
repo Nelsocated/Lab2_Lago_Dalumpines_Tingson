@@ -78,7 +78,7 @@ export default function FilterBar() {
             </div>
           ))}
 
-          <div className="flex flex-col gap-2 px-5 py-3">
+          <div className="flex flex-col gap-2 px-5 py-2">
             <span className="text-sm font-medium">Price</span>
             <div className="w-full">
               <div className="flex justify-between text-xs text-neutral-500 mb-2">

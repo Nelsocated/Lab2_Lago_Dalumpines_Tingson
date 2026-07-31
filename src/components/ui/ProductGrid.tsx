@@ -3,6 +3,7 @@ import { SlidersHorizontal, X } from "lucide-react";
 import { useActions } from "../state/useActions";
 import { useFilteredProducts } from "../state/useFilteredProducts";
 import FilterBar from "./FilterBar";
+import SortButton from "./SortButton";
 
 export default function ProductGrid() {
   const { addToCart } = useActions();
@@ -16,14 +17,17 @@ export default function ProductGrid() {
           <p className="mt-2 text-sm text-neutral-500">
             Showing 1-{displayedProducts.length} of {displayedProducts.length} results
           </p>
-        <button
-          type="button"
-          onClick={() => setFiltersOpen(true)}
-          className="mt-5 flex items-center gap-2 rounded-full border border-neutral-200 bg-white px-5 py-2.5 text-sm font-semibold text-neutral-700 shadow-sm transition-colors hover:border-primary hover:text-primary"
-        >
-          <SlidersHorizontal size={16} />
-          Filters
-        </button>
+        <div className="mt-5 flex flex-wrap items-center gap-3">
+          <button
+            type="button"
+            onClick={() => setFiltersOpen(true)}
+            className="flex items-center gap-2 rounded-full border border-neutral-200 bg-white px-5 py-2.5 text-sm font-semibold text-neutral-700 shadow-sm transition-colors hover:border-primary hover:text-primary"
+          >
+            <SlidersHorizontal size={16} />
+            Filters
+          </button>
+          <SortButton />
+        </div>
       </div>
       
       <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">

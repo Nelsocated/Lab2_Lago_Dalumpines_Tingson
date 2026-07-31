@@ -6,7 +6,7 @@ export default function HeroBanner() {
     >
       <div className="pointer-events-none absolute inset-0 bg-gradient-to-r from-black via-black/60 to-transparent" />
 
-     <div className="relative z-10 max-w-2xl px-36 lg:px-20">
+     <div className="relative z-10 max-w-2xl px-12">
         <h1 className="text-6xl font-bold font-monserrat leading-tight text-white sm:text-7xl">
           Gear Up for
           <br />

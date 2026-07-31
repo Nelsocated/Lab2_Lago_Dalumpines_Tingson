@@ -3,21 +3,21 @@ import { useActions } from "../state/useActions";
 const Header = () => {
   const { setFilters } = useActions();
   return (
-    <header className="w-full h-20 bg-black py-1 px-6 flex items-center justify-between gap-8 shadow-md relative z-10">
+    <header className="absolute top-0 left-0 z-50 flex h-20 w-full items-center justify-between px-12 lg:px-20">
       <button
         type="button"
         onClick={() => setFilters({ searchQuery: "" })}
         className="flex items-center gap-2.5 group"
       >
-        <div className="w-20 h-20 rounded-xl flex items-center justify-center">
+        <div className="w-12 h-12 rounded-lg flex items-center justify-center group-hover:scale-105">
           <img
             src="/favicon/Gearhub.svg"
             alt="GearHub Logo"
-            width={300}
-            height={300}
+            width={100}
+            height={100}
           ></img>
         </div>
-        <h1 className="text-2xl font-montserrat font-bold text-white tracking-tight">
+        <h1 className="text-xl font-montserrat font-bold text-white tracking-tight">
           GearHub
         </h1>
       </button>
@@ -27,16 +27,16 @@ const Header = () => {
             type="text"
             placeholder="Search products"
             onChange={(e) => setFilters({ searchQuery: e.target.value })}
-            className="w-full pl-4 pr-10 py-2 text-sm bg-neutral-800 border border-neutral-700 rounded-full text-white placeholder-neutral-500 focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary/30 transition-colors"
+            className="w-full pl-4 pr-10 py-1.5 text-sm bg-white text-neutral-800 rounded-full shadow-sm placeholder-neutral-400 focus:outline-none focus:ring-2 focus:ring-primary transition-shadow"
           ></input>
           <button
             type="button"
-            className="absolute right-1 flex items-center justify-center w-8 h-8 rounded-full text-neutral-400 hover:text-white hover:bg-neutral-800 transition-colors"
+            className="absolute right-1 flex items-center justify-center w-7 h-7 rounded-full text-neutral-400 hover:text-primary hover:bg-neutral-100 transition-colors"
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
-              width="16"
-              height="16"
+              width="15"
+              height="15"
               viewBox="0 0 24 24"
               fill="none"
               stroke="currentColor"

@@ -39,10 +39,7 @@ export default function FilterBar() {
   }
 
   return (
-    <aside className="flex flex-col w-[225px] shrink-0 h-[calc(100vh-5rem)] border-r border-neutral-200">
-      <h1 className="text-xl font-bold py-3 px-5">Filter Options</h1>
-      <hr className="border-neutral-200" />
-
+    <aside className="flex flex-col w-full">
       <form onSubmit={submitFilter} className="flex flex-col flex-1 min-h-0">
         <div className="flex-1 min-h-0 overflow-y-auto">
           {category.map(({ name, subcategories }) => (

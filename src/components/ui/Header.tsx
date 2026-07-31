@@ -3,45 +3,52 @@ import { useActions } from "../state/useActions";
 const Header = () => {
   const { setFilters } = useActions();
   return (
-    <header className="w-full h-20 bg-black border-b  border-black py-1 px-5 flex items-center justify-between">
-      <div className="flex items-center">
-        <div className="w-20 h-20 rounded-xl flex items-center justify-between">
+    <header className="absolute top-0 left-0 z-50 flex h-20 w-full items-center justify-between px-12 lg:px-20">
+      <button
+        type="button"
+        onClick={() => setFilters({ searchQuery: "" })}
+        className="flex items-center gap-2.5 group"
+      >
+        <div className="w-12 h-12 rounded-lg flex items-center justify-center group-hover:scale-105">
           <img
             src="/favicon/Gearhub.svg"
             alt="GearHub Logo"
-            width={300}
-            height={300}
+            width={100}
+            height={100}
           ></img>
         </div>
-        <h1 className="text-2xl font-montserrat font-bold text-white">
+        <h1 className="text-xl font-montserrat font-bold text-white tracking-tight">
           GearHub
         </h1>
-      </div>
-      <div className="flex items-center space-x-3 mt-2">
-        <div className="relative">
+      </button>
+      <div className="flex items-center flex-1 justify-end">
+        <div className="relative w-full max-w-sm flex items-center">
           <input
             type="text"
-            placeholder="Search"
+            placeholder="Search products"
             onChange={(e) => setFilters({ searchQuery: e.target.value })}
-            className="w-64 px-5 py-1.5 text-xs font-mono border border-gray-300 rounded-lg uppercase tracking-wide placeholder-gray-400 focus:outline-none focus:border-orange-500"
+            className="w-full pl-4 pr-10 py-1.5 text-sm bg-white text-neutral-800 rounded-full shadow-sm placeholder-neutral-400 focus:outline-none focus:ring-2 focus:ring-primary transition-shadow"
           ></input>
-        </div>
-        <button className=" hover:bg-gray-100 rounded-full transition-colors duration-200">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="20"
-            height="20"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="2"
-            stroke-linecap="round"
-            stroke-linejoin="round"
+          <button
+            type="button"
+            className="absolute right-1 flex items-center justify-center w-7 h-7 rounded-full text-neutral-400 hover:text-primary hover:bg-neutral-100 transition-colors"
           >
-            <path d="m21 21-4.34-4.34" />
-            <circle cx="11" cy="11" r="8" />
-          </svg>
-        </button>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="15"
+              height="15"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            >
+              <path d="m21 21-4.34-4.34" />
+              <circle cx="11" cy="11" r="8" />
+            </svg>
+          </button>
+        </div>
       </div>
     </header>
   );

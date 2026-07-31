@@ -40,14 +40,14 @@ export default function FilterBar() {
 
   return (
     <aside className="flex flex-col w-[225px] shrink-0 h-[calc(100vh-5rem)] border-r border-neutral-200">
-      <h1 className="text-xl font-bold py-4 px-5">Filter Options</h1>
+      <h1 className="text-xl font-bold py-3 px-5">Filter Options</h1>
       <hr className="border-neutral-200" />
 
       <form onSubmit={submitFilter} className="flex flex-col flex-1 min-h-0">
         <div className="flex-1 min-h-0 overflow-y-auto">
           {category.map(({ name, subcategories }) => (
             <div key={name} className="border-b border-neutral-200">
-              <div className="py-3 px-5 space-y-1.5">
+              <div className="py-2 px-5 space-y-1.5">
                 <label className="flex items-center gap-2 text-sm font-medium cursor-pointer">
                   <input
                     type="checkbox"
@@ -78,7 +78,7 @@ export default function FilterBar() {
             </div>
           ))}
 
-          <div className="flex flex-col gap-2 px-5 py-4">
+          <div className="flex flex-col gap-2 px-5 py-3">
             <span className="text-sm font-medium">Price</span>
             <div className="w-full">
               <div className="flex justify-between text-xs text-neutral-500 mb-2">

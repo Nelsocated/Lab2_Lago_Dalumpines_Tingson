@@ -39,87 +39,92 @@ export default function FilterBar() {
   }
 
   return (
-    <aside className="max-w-[225px] h-[calc(100vh-5rem)] border-r border-black">
-      <h1 className="text-2xl font-bold py-2 px-5">Filter Options</h1>
-      <hr />
+    <aside className="flex flex-col w-[225px] shrink-0 h-[calc(100vh-5rem)] border-r border-neutral-200">
+      <h1 className="text-xl font-bold py-4 px-5">Filter Options</h1>
+      <hr className="border-neutral-200" />
 
-      <form onSubmit={submitFilter}>
-        {category.map(({ name, subcategories }) => (
-          <div key={name}>
-            <div className="py-2 px-5">
-              <label className="flex items-center gap-2">
-                <input
-                  type="checkbox"
-                  className="accent-primary peer-checked:bg-black"
-                  value={name}
-                  checked={filter.includes(name)}
-                  onChange={() => handleCheckboxChange(name)}
-                />{" "}
-                {name}
-              </label>
-
-              {subcategories.map((acc) => (
-                <label key={acc} className="flex items-center ml-5 gap-2">
+      <form onSubmit={submitFilter} className="flex flex-col flex-1 min-h-0">
+        <div className="flex-1 min-h-0 overflow-y-auto">
+          {category.map(({ name, subcategories }) => (
+            <div key={name} className="border-b border-neutral-200">
+              <div className="py-3 px-5 space-y-1.5">
+                <label className="flex items-center gap-2 text-sm font-medium cursor-pointer">
                   <input
                     type="checkbox"
-                    className="accent-primary peer-checked:bg-black"
-                    value={acc}
-                    checked={filter.includes(acc)}
-                    onChange={() => handleCheckboxChange(acc)}
-                  />{" "}
-                  {acc.replace(/_/g, " ")}
+                    className="accent-primary"
+                    value={name}
+                    checked={filter.includes(name)}
+                    onChange={() => handleCheckboxChange(name)}
+                  />
+                  {name}
                 </label>
-              ))}
+
+                {subcategories.map((acc) => (
+                  <label
+                    key={acc}
+                    className="flex items-center ml-5 gap-2 text-sm text-neutral-500 cursor-pointer"
+                  >
+                    <input
+                      type="checkbox"
+                      className="accent-primary"
+                      value={acc}
+                      checked={filter.includes(acc)}
+                      onChange={() => handleCheckboxChange(acc)}
+                    />
+                    {acc.replace(/_/g, " ")}
+                  </label>
+                ))}
+              </div>
             </div>
-            <hr />
+          ))}
+
+          <div className="flex flex-col gap-2 px-5 py-4">
+            <span className="text-sm font-medium">Price</span>
+            <div className="w-full">
+              <div className="flex justify-between text-xs text-neutral-500 mb-2">
+                <span>₱{minVal.toLocaleString()}</span>
+                <span>₱{maxVal.toLocaleString()}</span>
+              </div>
+
+              <div className="relative h-2 flex items-center">
+                <div className="absolute w-full h-1.5 bg-neutral-200 rounded-full" />
+
+                <div
+                  className="absolute h-1.5 bg-primary rounded-full"
+                  style={{
+                    left: `${minPercent}%`,
+                    right: `${100 - maxPercent}%`,
+                  }}
+                />
+
+                <input
+                  type="range"
+                  min={0}
+                  max={100000}
+                  value={minVal}
+                  onChange={handleMinChange}
+                  className="absolute w-full h-1.5 appearance-none bg-transparent accent-primary"
+                />
+                <input
+                  type="range"
+                  min={0}
+                  max={100000}
+                  value={maxVal}
+                  onChange={handleMaxChange}
+                  className="absolute w-full h-1.5 appearance-none bg-transparent accent-primary"
+                />
+              </div>
+            </div>
           </div>
-        ))}
+        </div>
 
-        <label className="flex flex-col gap-2 px-5">
-          Price
-          <div className="w-full">
-            <div className="flex gap-3 text-sm ml-5 mb-1">
-              <span>₱ {minVal}</span> -<span>₱ {maxVal}</span>
-            </div>
-
-            <div className="relative h-2 flex items-center">
-              <div className="absolute w-full h-2 bg-gray-300 rounded-full" />
-
-              <div
-                className="absolute h-2 bg-primary rounded-full"
-                style={{
-                  left: `${minPercent}%`,
-                  right: `${100 - maxPercent}%`,
-                }}
-              />
-
-              <input
-                type="range"
-                min={0}
-                max={100000}
-                value={minVal}
-                onChange={handleMinChange}
-                className="absolute w-full pointer-events-none accent-primary appearance-none bg-transparent"
-              />
-              <input
-                type="range"
-                min={0}
-                max={100000}
-                value={maxVal}
-                onChange={handleMaxChange}
-                className="absolute w-full pointer-events-none accent-primary appearance-none bg-transparent"
-              />
-            </div>
-          </div>
-        </label>
-
-        <div className="flex justify-center mt-5 px-5">
+        <div className="p-3 border-t border-neutral-200">
           <button
             type="submit"
-            className="flex items-center justify-center gap-3 p-3 w-full border border-primary rounded-2xl hover:bg-primary transition-colors"
+            className="flex items-center justify-center gap-2 py-2.5 w-full border border-primary rounded-xl font-semibold hover:bg-primary hover:text-white transition-colors"
           >
-            <SlidersHorizontal />
-            <span className="font-semibold text-2xl">Filter</span>
+            <SlidersHorizontal size={18} />
+            <span>Filter</span>
           </button>
         </div>
       </form>

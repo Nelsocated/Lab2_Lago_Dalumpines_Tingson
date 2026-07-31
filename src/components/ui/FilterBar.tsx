@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { SlidersHorizontal } from "lucide-react";
 import { category } from "../types/category";
 import { useActions } from "../state/useActions";
@@ -8,9 +8,15 @@ export default function FilterBar() {
   const [filter, setFilter] = useState<string[]>([]);
   const [minVal, setMinVal] = useState(0);
   const [maxVal, setMaxVal] = useState(100000);
+  const [mounted, setMounted] = useState(false);
 
   const MIN = 0;
   const MAX = 100000;
+
+  useEffect(() => {
+    const id = requestAnimationFrame(() => setMounted(true));
+    return () => cancelAnimationFrame(id);
+  }, []);
 
   const handleCheckboxChange = (value: string) => {
     setFilter((prev) =>
@@ -39,7 +45,11 @@ export default function FilterBar() {
   }
 
   return (
-    <aside className="flex flex-col w-full">
+    <aside
+      className={`flex flex-col w-full transition-transform duration-300 ease-out ${
+        mounted ? "translate-x-0" : "-translate-x-full"
+      }`}
+    >
       <form onSubmit={submitFilter} className="flex flex-col flex-1 min-h-0">
         <div className="flex-1 min-h-0 overflow-y-auto">
           {category.map(({ name, subcategories }) => (

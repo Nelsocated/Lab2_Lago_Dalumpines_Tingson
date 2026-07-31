@@ -12,11 +12,12 @@ export default function ProductGrid() {
 
   return (
     <section className="flex-1 px-10 lg:px-16 py-10">
-        <div className="mb-4">
-          <h1 className="text-2xl font-bold text-neutral-900">Products</h1>
-          <p className="mt-2 text-sm text-neutral-500">
-            Showing 1-{displayedProducts.length} of {displayedProducts.length} results
-          </p>
+      <div className="mb-4">
+        <h1 className="text-2xl font-bold text-neutral-900">Products</h1>
+        <p className="mt-2 text-sm text-neutral-500">
+          Showing 1-{displayedProducts.length} of {displayedProducts.length}{" "}
+          results
+        </p>
         <div className="mt-5 flex flex-wrap items-center gap-3">
           <button
             type="button"
@@ -29,7 +30,7 @@ export default function ProductGrid() {
           <SortButton />
         </div>
       </div>
-      
+
       <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
         {displayedProducts.map((product) => (
           <article
@@ -53,11 +54,15 @@ export default function ProductGrid() {
               </div>
             </div>
             <div className="flex min-h-0 flex-1 flex-col px-1 pt-3">
-              <h2 className="truncate text-base font-bold text-neutral-900">{product.name}</h2>
+              <h2 className="truncate text-base font-bold text-neutral-900">
+                {product.name}
+              </h2>
               <p className="mt-0.5 text-lg font-bold text-primary">
                 ₱{product.price.toLocaleString()}
               </p>
-              <p className="mt-1 text-sm text-neutral-400">{product.category}</p>
+              <p className="mt-1 text-sm text-neutral-400">
+                {product.category}
+              </p>
             </div>
           </article>
         ))}
@@ -71,7 +76,12 @@ export default function ProductGrid() {
 
       {filtersOpen && (
         <div className="fixed inset-0 z-50 flex justify-start bg-black/40">
-          <div className="h-full w-full max-w-[280px] overflow-y-auto bg-white shadow-xl animate-in slide-in-from-left">
+          <div
+            onClick={() => setFiltersOpen(false)}
+            className="absolute inset-0"
+          />
+
+          <div className="relative h-full w-full max-w-[280px] overflow-y-auto bg-white shadow-xl animate-in slide-in-from-left">
             <div className="flex items-center justify-between px-5 py-4 border-b border-neutral-200">
               <span className="font-bold text-neutral-900">Filter Options</span>
               <button type="button" onClick={() => setFiltersOpen(false)}>

@@ -36,3 +36,25 @@ body {
 .scroll-stable {
   scrollbar-gutter: stable;
 }
+
+.range-thumb::-webkit-slider-thumb {
+  pointer-events: auto;
+  -webkit-appearance: none;
+  appearance: none;
+  width: 16px;
+  height: 16px;
+  border-radius: 9999px;
+  background: theme("colors.primary");
+  cursor: pointer;
+  position: relative;
+}
+
+.range-thumb::-moz-range-thumb {
+  pointer-events: auto;
+  width: 16px;
+  height: 16px;
+  border-radius: 9999px;
+  background: theme("colors.primary");
+  border: none;
+  cursor: pointer;
+}

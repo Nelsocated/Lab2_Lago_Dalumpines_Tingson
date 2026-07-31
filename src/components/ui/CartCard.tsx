@@ -51,7 +51,7 @@ export default function CartCard({
         </button>
       </div>
 
-      <div className="flex items-center gap-2 shrink-0 w-20">
+      <div className="flex items-center justify-end gap-2 shrink-0 w-20">
         <span className="font-semibold text-sm">
           ₱{subtotal.toLocaleString()}
         </span>

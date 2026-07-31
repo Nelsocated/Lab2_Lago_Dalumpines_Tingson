@@ -44,7 +44,7 @@ export default function FilterBar() {
         <div className="flex-1 min-h-0 overflow-y-auto">
           {category.map(({ name, subcategories }) => (
             <div key={name} className="border-b border-neutral-200">
-              <div className="py-3 px-5 space-y-1.5">
+              <div className="py-2 px-5 space-y-1.5">
                 <label className="flex items-center gap-2 text-sm font-medium cursor-pointer">
                   <input
                     type="checkbox"
@@ -75,7 +75,7 @@ export default function FilterBar() {
             </div>
           ))}
 
-          <div className="flex flex-col gap-2 px-5 py-4">
+          <div className="flex flex-col gap-2 px-5 py-2">
             <span className="text-sm font-medium">Price</span>
             <div className="w-full">
               <div className="flex justify-between text-xs text-neutral-500 mb-2">
@@ -100,7 +100,7 @@ export default function FilterBar() {
                   max={100000}
                   value={minVal}
                   onChange={handleMinChange}
-                  className="absolute w-full h-1.5 appearance-none bg-transparent accent-primary"
+                  className="range-thumb absolute w-full h-1.5 appearance-none bg-transparent pointer-events-none z-20"
                 />
                 <input
                   type="range"
@@ -108,7 +108,7 @@ export default function FilterBar() {
                   max={100000}
                   value={maxVal}
                   onChange={handleMaxChange}
-                  className="absolute w-full h-1.5 appearance-none bg-transparent accent-primary"
+                  className="range-thumb absolute w-full h-1.5 appearance-none bg-transparent pointer-events-none z-20"
                 />
               </div>
             </div>

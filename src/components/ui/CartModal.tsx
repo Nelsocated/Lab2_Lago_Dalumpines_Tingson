@@ -37,8 +37,14 @@ export default function CartModal() {
       </button>
 
       {state.isCartOpen && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 p-4">
-          <article className="max-w-lg w-full max-h-[60vh] border p-2 text-lg bg-white rounded-xl overflow-hidden flex flex-col">
+        <div
+          onClick={() => toggleCart()}
+          className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 p-4"
+        >
+          <article
+            onClick={(e) => e.stopPropagation()}
+            className="max-w-lg w-full max-h-[60vh] border p-2 text-lg bg-white rounded-xl overflow-hidden flex flex-col"
+          >
             <form
               onSubmit={checkoutSubmit}
               className="flex flex-col flex-1 min-h-0"

@@ -3,7 +3,7 @@
 GearHub is a single-page React app for browsing tech accessories, filtering products, managing a cart, and processing a simulated checkout. State management relies entirely on React's `useReducer` combined with `createContext`.
 
 **Course:** SE2144 — Lab 2 Activity
-**Members:** Nelson Lago III, Justin Jan Dalumpines
+**Members:** Nelson Lago III, Justin Jan Dalumpines, Reinwel Tingson
 
 ---
 
@@ -45,7 +45,7 @@ GearHub is a single-page React app for browsing tech accessories, filtering prod
 
 1. Clone the repository
    ```bash
-   git clone https://github.com/nelsocated/WebDev_Lab2_Lago_Dalumpines.git
+   git clone https://github.com/nelsocated/Lab2_Lago_Dalumpines_Tingson.git
    ```
 
 2. Install dependencies

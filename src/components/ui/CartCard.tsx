@@ -34,8 +34,8 @@ export default function CartCard({
       <div className="flex justify-center gap-3">
         {quantity}{" "}
         <div className="flex flex-col">
-          <button onClick={() => updateQuantity(id, quantity + 1)}>+</button>
-          <button onClick={() => updateQuantity(id, quantity - 1)}>-</button>
+          <button type="button" onClick={() => updateQuantity(id, quantity + 1)}>+</button>
+          <button type="button" onClick={() => updateQuantity(id, quantity - 1)}>-</button>
         </div>{" "}
       </div>
       <div className="flex justify-center gap-3">

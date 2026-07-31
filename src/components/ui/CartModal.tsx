@@ -13,7 +13,8 @@ export default function CartModal() {
 
   function checkoutSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
-    checkout();
+    checkout()
+    
     setSub(0);
     setShipping(50);
     setTotal(0);
@@ -22,7 +23,7 @@ export default function CartModal() {
   return (
     <>
       <button
-        onClick={() => toggleCart}
+        onClick={() => toggleCart()}
         className="fixed bottom-6 right-6 z-40 border-2 border-primary rounded-full p-3 bg-white hover:scale-105 transition-all hover:bg-primary shadow-lg"
       >
         {state.cart.length > 0 && (
@@ -46,7 +47,7 @@ export default function CartModal() {
                   <h1 className="text-xl">Cart</h1>
                   <Trash onClick={() => clearCart()} />
                 </div>
-                <button type="button" onClick={() => toggleCart}>
+                <button type="button" onClick={() => toggleCart()}>
                   <X size={20} />
                 </button>
               </div>

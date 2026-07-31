@@ -19,35 +19,44 @@ export function appReducer(state: State, action: Action): State {
       };
     }
 
-    case "REMOVE_FROM_CART":
+    case "REMOVE_FROM_CART": {
       return {
         ...state,
         cart: state.cart.filter((item) => item.id !== action.payload.id),
       };
+    }
 
-    case "UPDATE_QUANTITY":
+    case "UPDATE_QUANTITY": {
       return {
         ...state,
         cart: state.cart.map((item) =>
           item.id === action.payload.id
-            ? { ...item, quantity: action.payload.quantity }
+            ? { ...item, quantity: Math.max(1, action.payload.quantity) }
             : item,
         ),
       };
+    }
 
-    case "CLEAR_CART":
+    case "CLEAR_CART": {
       return { ...state, cart: [] };
+    }
 
-    case "SET_FILTERS":
+    case "SET_FILTERS": {
       return { ...state, filters: { ...state.filters, ...action.payload } };
+    }
 
-    case "TOGGLE_CART":
+    case "TOGGLE_CART": {
       return {
         ...state,
         isCartOpen: !state.isCartOpen,
       };
+    }
 
     case "CHECKOUT": {
+      if (state.cart.length === 0) {
+        return state;
+      }
+
       const purchasedIds = new Set(state.cart.map((item) => item.id));
 
       return {
@@ -61,6 +70,7 @@ export function appReducer(state: State, action: Action): State {
         isCartOpen: false,
       };
     }
+
     default:
       return state;
   }

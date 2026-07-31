@@ -25,6 +25,8 @@ export function useFilteredProducts() {
     result = [...result].sort((a, b) => a.price - b.price);
   } else if (sortBy === "price-desc") {
     result = [...result].sort((a, b) => b.price - a.price);
+  } else if (sortBy === "name-asc") {
+    result = [...result].sort((a, b) => a.name.localeCompare(b.name));
   }
   return result;
 }

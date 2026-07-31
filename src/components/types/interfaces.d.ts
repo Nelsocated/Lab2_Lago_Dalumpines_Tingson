@@ -20,7 +20,7 @@ export interface State {
     category: string;
     maxPrice: number;
     minPrice: number;
-    sortBy: "default" | "price-asc" | "price-desc";
+    sortBy: "default" | "price-asc" | "price-desc" | "name-asc";
   };
   isCartOpen: boolean;
 }

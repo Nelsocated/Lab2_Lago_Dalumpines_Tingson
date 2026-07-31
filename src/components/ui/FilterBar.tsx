@@ -103,7 +103,7 @@ export default function FilterBar() {
                   max={100000}
                   value={minVal}
                   onChange={handleMinChange}
-                  className="absolute w-full h-1.5 appearance-none bg-transparent accent-primary"
+                  className="range-thumb absolute w-full h-1.5 appearance-none bg-transparent pointer-events-none z-20"
                 />
                 <input
                   type="range"
@@ -111,7 +111,7 @@ export default function FilterBar() {
                   max={100000}
                   value={maxVal}
                   onChange={handleMaxChange}
-                  className="absolute w-full h-1.5 appearance-none bg-transparent accent-primary"
+                  className="range-thumb absolute w-full h-1.5 appearance-none bg-transparent pointer-events-none z-20"
                 />
               </div>
             </div>

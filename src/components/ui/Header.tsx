@@ -1,9 +1,35 @@
 import { useActions } from "../state/useActions";
+import { useEffect, useState } from "react";
 
 const Header = () => {
   const { setFilters } = useActions();
+  const [scrolled, setScrolled] = useState(false);
+
+  useEffect(() => {
+    const scrollEl = document.getElementById("scroll-container") ?? window;
+    console.log(
+      "Listening on:",
+      scrollEl === window ? "window" : "#scroll-container",
+    );
+    const onScroll = () => {
+      const y =
+        scrollEl === window
+          ? window.scrollY
+          : (scrollEl as HTMLElement).scrollTop;
+      setScrolled(y > 20);
+    };
+    scrollEl.addEventListener("scroll", onScroll);
+    return () => scrollEl.removeEventListener("scroll", onScroll);
+  }, []);
+
   return (
-    <header className="absolute top-0 left-0 z-50 flex h-20 w-full items-center justify-between px-12 lg:px-20">
+    <header
+      className={`fixed top-0 left-0 z-50 flex h-20 w-full items-center justify-between px-12 lg:px-20 transition-colors duration-300 ${
+        scrolled
+          ? "bg-gradient-to-b from-black via-black/80 to-black/60 shadow-sm"
+          : "bg-transparent"
+      }`}
+    >
       <button
         type="button"
         onClick={() => setFilters({ searchQuery: "" })}
@@ -17,7 +43,9 @@ const Header = () => {
             height={100}
           ></img>
         </div>
-        <h1 className="text-xl font-montserrat font-bold text-white tracking-tight">
+        <h1
+          className={`text-xl font-montserrat font-bold tracking-tight transition-colors text-white`}
+        >
           GearHub
         </h1>
       </button>

@@ -1,5 +1,4 @@
-import { ShoppingCart, Trash, X } from "lucide-react";
-import { useState } from "react";
+import { ShoppingCart, Trash2, X } from "lucide-react";
 import CartCard from "./CartCard";
 import { useStore } from "../state/AppStateContext";
 import { useActions } from "../state/useActions";
@@ -7,17 +6,17 @@ import { useActions } from "../state/useActions";
 export default function CartModal() {
   const { state } = useStore();
   const { clearCart, checkout, toggleCart } = useActions();
-  const [sub, setSub] = useState(0);
-  const [shipping, setShipping] = useState(50);
-  const [total, setTotal] = useState(0);
+
+  const sub = state.cart.reduce(
+    (acc, item) => acc + item.price * item.quantity,
+    0,
+  );
+  const shipping = state.cart.length > 0 ? 50 : 0;
+  const total = sub + shipping;
 
   function checkoutSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
-    checkout()
-    
-    setSub(0);
-    setShipping(50);
-    setTotal(0);
+    checkout();
   }
 
   return (
@@ -27,7 +26,10 @@ export default function CartModal() {
         className="fixed bottom-6 right-6 z-40 border-2 border-primary rounded-full p-3 bg-white hover:scale-105 transition-all hover:bg-primary shadow-lg"
       >
         {state.cart.length > 0 && (
-          <div className="absolute flex items-center justify-center w-5 h-5 bg-primary text-white text-xs font-bold rounded-full translate-x-6">
+          <div
+            key={state.cart.length}
+            className="absolute flex items-center justify-center w-5 h-5 bg-primary text-white text-xs font-bold rounded-full translate-x-6 animate-pop"
+          >
             {state.cart.length}
           </div>
         )}
@@ -45,7 +47,12 @@ export default function CartModal() {
                 <div className="flex items-center gap-2">
                   <ShoppingCart size={20} />
                   <h1 className="text-xl">Cart</h1>
-                  <Trash onClick={() => clearCart()} />
+                  <button type="button" onClick={() => clearCart()}>
+                    <Trash2
+                      size={16}
+                      className="text-neutral-400 hover:text-red-500 transition"
+                    />
+                  </button>
                 </div>
                 <button type="button" onClick={() => toggleCart()}>
                   <X size={20} />
@@ -53,9 +60,13 @@ export default function CartModal() {
               </div>
 
               <div className="flex-1 min-h-0 space-y-2 overflow-y-auto scroll-smooth mb-2">
-                {state.cart.map((item) => (
-                  <CartCard key={item.id} {...item} />
-                ))}
+                {state.cart.length === 0 ? (
+                  <p className="text-center text-sm text-neutral-400 py-10">
+                    Your cart is empty.
+                  </p>
+                ) : (
+                  state.cart.map((item) => <CartCard key={item.id} {...item} />)
+                )}
               </div>
 
               <hr className="bg-black" />
@@ -66,8 +77,8 @@ export default function CartModal() {
                   <p>Shipping</p>
                 </div>
                 <div className="flex flex-col justify-end font-semibold mr-2">
-                  <p>{sub ? `$ ${sub.toLocaleString()}` : 0}</p>
-                  <p>{shipping ? `$ ${shipping.toLocaleString()}` : 0}</p>
+                  <p>₱ {sub.toLocaleString()}</p>
+                  <p>₱ {shipping.toLocaleString()}</p>
                 </div>
               </div>
 
@@ -78,14 +89,15 @@ export default function CartModal() {
                   Total
                 </div>
                 <div className="flex flex-col justify-end font-bold text-primary mr-2">
-                  {total ? `$ ${total.toLocaleString()}` : 0}
+                  ₱ {total.toLocaleString()}
                 </div>
               </div>
 
               <div className="flex justify-end mt-2">
                 <button
                   type="submit"
-                  className="bg-primary rounded-[15px] px-2 py-1 text-white font-bold flex items-center"
+                  disabled={state.cart.length === 0}
+                  className="bg-primary rounded-[15px] px-2 py-1 text-white font-bold flex items-center disabled:opacity-40 disabled:cursor-not-allowed"
                 >
                   Checkout
                 </button>

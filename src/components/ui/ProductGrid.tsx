@@ -12,34 +12,34 @@ export default function ProductGrid() {
         results
       </p>
 
-      <div className="grid grid-cols-1 border-2 border-black gap-8 sm:grid-cols-2 xl:grid-cols-4">
+      <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 xl:grid-cols-4">
         {displayedProducts.map((product) => (
           <article
             key={product.id}
-            className="flex h-[340px] min-w-0 flex-col overflow-hidden rounded-lg bg-white"
+            className="flex h-[360px] min-w-0 flex-col overflow-hidden rounded-2xl bg-white p-3 shadow-sm ring-1 ring-neutral-100 transition-shadow duration-200 hover:shadow-lg"
           >
-            <div className="group border-2 border-black relative flex h-60 w-full items-center justify-center overflow-hidden bg-neutral-50">
+            <div className="group relative flex h-56 w-full items-center justify-center overflow-hidden rounded-xl bg-neutral-100">
               <img
                 src={product.image}
                 alt={product.name}
-                className="h-full w-full object-contain p-3"
+                className="h-full w-full object-contain p-5"
               />
-              <div className="absolute inset-0 grid place-items-center bg-orange-400/70 opacity-0 transition-opacity duration-200 group-hover:opacity-100">
+              <div className="absolute inset-0 grid place-items-center bg-black/40 opacity-0 transition-opacity duration-200 group-hover:opacity-100">
                 <button
                   type="button"
                   onClick={() => addToCart(product)}
-                  className="rounded-2xl border-2 border-black bg-orange-600 px-7 py-3 text-lg font-bold text-black shadow-sm transition hover:scale-105 hover:bg-orange-500"
+                  className="rounded-full bg-primary px-6 py-2.5 text-sm font-bold uppercase tracking-wide text-white shadow-md transition hover:scale-105 hover:bg-orange-600"
                 >
-                  ADD TO CART
+                  Add to cart
                 </button>
               </div>
             </div>
             <div className="flex min-h-0 flex-1 flex-col px-1 pt-3">
-              <p className="text-[15px] text-neutral-400">{product.category}</p>
-              <h2 className="truncate text-L font-medium">{product.name}</h2>
-              <p className="text-xl font-bold text-primary">
+              <h2 className="truncate text-base font-bold text-neutral-900">{product.name}</h2>
+              <p className="mt-0.5 text-lg font-bold text-primary">
                 ₱{product.price.toLocaleString()}
               </p>
+              <p className="mt-1 text-sm text-neutral-400">{product.category}</p>
             </div>
           </article>
         ))}

@@ -7,7 +7,7 @@ import { AppStateProvider } from "./components/state/AppStateContext";
 export default function App() {
   return (
     <AppStateProvider>
-      <main id="scroll-container" className="h-screen overflow-y-auto">
+      <main>
         <div className="relative">
           <Header />
           <Banner />

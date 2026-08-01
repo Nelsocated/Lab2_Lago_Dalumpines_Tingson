@@ -6,20 +6,9 @@ const Header = () => {
   const [scrolled, setScrolled] = useState(false);
 
   useEffect(() => {
-    const scrollEl = document.getElementById("scroll-container") ?? window;
-    console.log(
-      "Listening on:",
-      scrollEl === window ? "window" : "#scroll-container",
-    );
-    const onScroll = () => {
-      const y =
-        scrollEl === window
-          ? window.scrollY
-          : (scrollEl as HTMLElement).scrollTop;
-      setScrolled(y > 20);
-    };
-    scrollEl.addEventListener("scroll", onScroll);
-    return () => scrollEl.removeEventListener("scroll", onScroll);
+    const onScroll = () => setScrolled(window.scrollY > 20);
+    window.addEventListener("scroll", onScroll);
+    return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
   return (

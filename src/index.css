@@ -30,13 +30,6 @@ input[type="range"]::-moz-range-thumb {
   background: #f08c00;
 }
 
-body {
-  scrollbar-gutter: stable;
-}
-.scroll-stable {
-  scrollbar-gutter: stable;
-}
-
 .range-thumb::-webkit-slider-thumb {
   pointer-events: auto;
   -webkit-appearance: none;

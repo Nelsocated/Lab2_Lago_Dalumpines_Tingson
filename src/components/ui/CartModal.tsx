@@ -104,6 +104,7 @@ export default function CartModal() {
                   type="submit"
                   disabled={state.cart.length === 0}
                   className="bg-primary rounded-[15px] px-2 py-1 text-white font-bold flex items-center disabled:opacity-40 disabled:cursor-not-allowed"
+                  onClick={() => alert('Thank you for your purchase!')}
                 >
                   Checkout
                 </button>

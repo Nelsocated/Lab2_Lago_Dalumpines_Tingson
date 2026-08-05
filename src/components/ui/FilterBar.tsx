@@ -18,11 +18,22 @@ export default function FilterBar() {
     return () => cancelAnimationFrame(id);
   }, []);
 
-  const handleCheckboxChange = (value: string) => {
-    setFilter((prev) =>
-      prev.includes(value) ? prev.filter((v) => v !== value) : [...prev, value],
-    );
-  };
+ const handleCheckboxChange = (value: string, subcategories: string[] = []) => {
+  setFilter((prev) => {
+    const isCurrentlyChecked = prev.includes(value);
+    
+    const targets = [value, ...subcategories];
+
+    if (isCurrentlyChecked) {
+      
+      return prev.filter((v) => !targets.includes(v));
+    } else {
+ 
+      const uniqueNewItems = targets.filter(t => !prev.includes(t));
+      return [...prev, ...uniqueNewItems];
+    }
+  });
+};
 
   const handleMinChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setMinVal(Math.min(Number(e.target.value), maxVal - 1));
@@ -61,7 +72,7 @@ export default function FilterBar() {
                     className="accent-primary"
                     value={name}
                     checked={filter.includes(name)}
-                    onChange={() => handleCheckboxChange(name)}
+                    onChange={() => handleCheckboxChange(name,subcategories)}
                   />
                   {name}
                 </label>

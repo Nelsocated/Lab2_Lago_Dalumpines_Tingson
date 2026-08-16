@@ -12,43 +12,35 @@ GearHub is a single-page React app for browsing tech accessories, filtering prod
 - React (Create React App)
 - TypeScript
 - Tailwind CSS
-- React Context API + `useReducer` for global state
 - Static JSON / mock data file for products
 
 ---
 
 ## Core Features
 
-### Product Browsing & Filtering
-- Grid display of products fetched from a static JSON file or mock data file.
-- Filter products by **category**, **max price range**, and **search query**.
-- Sort products by **price** (low-to-high, high-to-low) or **title**.
-
-### Global Cart Management
-- Slide-out / drawer overlay for the Shopping Cart.
-- Add items, remove items, and adjust item quantities (+ / -).
-- Real-time **subtotal** and **grand total** calculation.
-
-### User Experience Details
-- Badge counter on the cart icon reflecting the **total item count** (sum of quantities, not just distinct line items).
-- Simulated checkout flow (no real payment processing).
+- Product Browsing & Filtering
+- Global Cart Management
+- User Experience Details
 
 ---
 
 ## Getting Started
 
 ### Prerequisites
+
 - [Node.js](https://nodejs.org/) (v18 or higher recommended)
 - npm (comes with Node.js)
 
 ### Installation
 
 1. Clone the repository
+
    ```bash
    git clone https://github.com/nelsocated/Lab2_Lago_Dalumpines_Tingson.git
    ```
 
 2. Install dependencies
+
    ```bash
    npm install
    ```
@@ -59,6 +51,7 @@ GearHub is a single-page React app for browsing tech accessories, filtering prod
    ```
 
 ### Build for Production
+
 ```bash
 npm run build
 ```
